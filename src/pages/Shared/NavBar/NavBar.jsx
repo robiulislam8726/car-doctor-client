@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
 
 const NavBar = () => {
+    const navItems = <>
+    <li><Link to="/">Home</Link></li>
+    <li><Link to="/about">About</Link></li>
+    <li><Link to="/contact">Contact</Link></li>
+   
+    </>
     return (
-        <div className="bg-base-100 navbar">
+        <div className="bg-base-100 mb-4 h-28 navbar">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="lg:hidden btn btn-ghost">
@@ -24,15 +30,8 @@ const NavBar = () => {
                     <ul
                         tabIndex={0}
                         className="z-[1] bg-base-100 shadow mt-3 p-2 rounded-box w-52 dropdown-content menu menu-sm">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
+                            {navItems}
+                       
                     </ul>
                 </div>
                 <Link to="/" className="text-xl btn btn-ghost">
@@ -41,21 +40,11 @@ const NavBar = () => {
             </div>
             <div className="lg:flex hidden navbar-center">
                 <ul className="px-1 menu menu-horizontal">
-                    <li><a>Item 1</a></li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li><a>Item 3</a></li>
+                    {navItems}
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+            <button className="btn btn-outline btn-secondary">Appoinment</button>
             </div>
         </div>
     );
