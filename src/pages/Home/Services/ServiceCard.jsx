@@ -2,8 +2,9 @@
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const ServiceCard = ({service}) => {
-    const {title, img, price} = service;
+
+const ServiceCard = ({ service }) => {
+    const { _id, title, img, price } = service;
     return (
         <div className="card bg-base-100 w-96 shadow-xl">
             <figure className="px-10 pt-10">
@@ -16,12 +17,16 @@ const ServiceCard = ({service}) => {
                 <h2 className="card-title">{title}</h2>
                 <p className="text-xl text-orange-500">Price: $ {price}</p>
                 <div className="card-actions  justify-between items-center">
-                   
-                 <button className="btn btn-primary">Booking</button>
-                    <Link to='/Home'>
-                    <FaArrowRight />
+
+                    <Link to={`/checkout/${_id}`}>
+                        <button className="btn btn-primary">Book Now</button>
                     </Link>
-                   
+
+
+
+                    <FaArrowRight />
+
+
                 </div>
             </div>
         </div>

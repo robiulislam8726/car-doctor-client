@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
+import { AuthContext } from '../../../providers/AuthProvider';
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+       logOut()
+       .then( () =>{})
+       .catch( error => console.log(error))
+    }
     const navItems = <>
-    <li><Link to="/">Home</Link></li>
-    <li><Link to="/about">About</Link></li>
-    <li><Link to="/contact">Contact</Link></li>
-   
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+        { user?.email ? <li><button onClick={handleLogOut}>Log Out</button></li>
+            : <li><Link to="/login">Login</Link></li>
+        }
+
     </>
     return (
         <div className="bg-base-100 mb-4 h-28 navbar">
@@ -30,12 +40,12 @@ const NavBar = () => {
                     <ul
                         tabIndex={0}
                         className="z-[1] bg-base-100 shadow mt-3 p-2 rounded-box w-52 dropdown-content menu menu-sm">
-                            {navItems}
-                       
+                        {navItems}
+
                     </ul>
                 </div>
                 <Link to="/" className="text-xl btn btn-ghost">
-                <img src={logo} alt="" />
+                    <img src={logo} alt="" />
                 </Link>
             </div>
             <div className="lg:flex hidden navbar-center">
@@ -44,7 +54,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-            <button className="btn btn-outline btn-secondary">Appoinment</button>
+                <button className="btn btn-outline btn-secondary">Appoinment</button>
             </div>
         </div>
     );
