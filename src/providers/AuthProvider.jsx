@@ -7,29 +7,29 @@ import { signOut } from "firebase/auth/cordova";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [ loading, setLoading] = useState (true);
+    const [loading, setLoading] = useState(true);
 
 
     const createUser = (email, password) => {
-        setLoading (true);
-        return createUserWithEmailAndPassword ( auth, email, password)
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password)
     }
     const signIn = (email, password) => {
-        setLoading (true);
-        return signInWithEmailAndPassword (auth, email, password)
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
-const logOut = () => {
-    setLoading(true);
-    return signOut (auth);
-}
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
+    }
 
-    useEffect ( () => {
-        const unsubscribe = onAuthStateChanged ( auth, currentUser => {
-            setUser (currentUser);
-            console.log ('current User', currentUser)
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser);
+            console.log('current User', currentUser)
         });
         return () => {
             return unsubscribe();
@@ -41,13 +41,13 @@ const logOut = () => {
         createUser,
         signIn,
         logOut
-        
+
 
     }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
-            
+
         </AuthContext.Provider>
     );
 };
